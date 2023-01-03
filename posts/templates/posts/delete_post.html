@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="profile-form-container">
+    <h5 class="card-title">Delete Post?</h5>
+    <p class="card-text">Deleting a post will permanently delete it from the database.</p>
+    <form method="POST" action="{% url 'posts:delete-post' post.pk %}">
+        {% csrf_token %}
+        <a class="btn btn-primary" href="{% url 'posts:posts' %}">Keep Post</a>
+        <button type="submit" class="btn btn=primary mt-2">Delete Post</button>
+    </form>
+
+</div>
+
+{% endblock %}

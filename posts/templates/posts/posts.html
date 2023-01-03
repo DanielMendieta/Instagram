@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+    
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="post-container">
+    {% for post in posts %}
+        <div class="post">
+            <div class="post-header d-flex justify-content-between">
+                <div class="d-flex">
+                    <a href="#">
+                        <img class="profile-pic" src="{% static 'imagen/Yo.jpg' %}">
+                    </a>
+                    <h6 class="post-user">{{post.user.username}}</h6>
+                </div>
+              
+<ul class="navbar-nav justify-content-end">
+    <li class="nav-item dropdown">
+        <button class="btn btn-light" href="#" id="navbarDropdown" role="button"  data-toggle="dropdown"  aria-expanded="false">
+         <strong>***</strong>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'posts:edit-post' post.pk %}">Edit</a>
+              <a class="dropdown-item" href="{% url 'posts:delete-post' post.pk %}">Delete</a>
+        </div>
+    </li>
+</ul>
+</div>
+<div class="post-pic-container">
+    <img class="post-pic" src="{{post.image.url}}">
+</div>
+<div class="post-footer">
+     <div class="likes d-flex">
+        <a href="#"> <svg xmlns="http://www.w3.org/2000/svg" width="20" height="28" fill="red" class="bi bi-heart" viewBox="0 0 16 16">
+            <path d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+          </svg></a>
+        <p><strong>{{post.likes}} Likes</strong></p>
+        
+     </div>
+    
+     <p class="quote"><strong>{{post.user.username}}</strong> {{post.quote}}</p>
+     <a href="#"><p class="test-muted">See the {{post.comments.all.count}} comments</p></a>
+     <small class="test-muted">{{post.created_at|date:"M d, Y"}}</small>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% endblock %}
